@@ -33,6 +33,13 @@
 // 그리고 각 간선간정보를 넣어주고.
 // 하나씩 돌려? 그건아니였어.. 또 까먹엇어. => 아직이해를 못한거지 ㅋ
 // 노트가져왓으니 그려봐라 알고리즘 그대로 그려보자
+
+// 시작노드에서 각노드까지 가능한 모든 경로로 접근해보기
+// 접근할때마다 비용이 적게드는걸 찾으면 갱신한다
+// 라는거 같음.
+// 여기서 납득되지않는건
+// 시작노드에서 각노드까지 가능한 모든경로로 접근하는 방법이 생소함
+
 #include <vector>
 #include <tuple>
 #include <iostream>
@@ -61,7 +68,7 @@ vector<int> solution(int num_vertices, vector<tuple<int, int, int>> edges, int s
     // 정점의 개수 -1 만큼 최소비용을 갱신 왜?? 난 모르겠어
     for (int i = 0; i < num_vertices - 1; ++i)
     {
-        for (int u = 0; u < num_vertices; ++u)
+        for (int u = 0; u < num_vertices; ++u) // 여기부터가 모든 간선을 한번 돌아보는것임. i는 아무역활도 안함 그냥 횟수만. 
         {
             for (const auto &[v, weight] : graph[u])
             {
@@ -77,7 +84,7 @@ vector<int> solution(int num_vertices, vector<tuple<int, int, int>> edges, int s
         }
     }
 
-    // 최단경로 갱신 동작 한번두수행
+    // 최단경로 갱신 동작 한번더수행
     // 갱신되는것이있다면 음의 순환이 있는것!
 
     for (int u = 0; u < num_vertices; u++)
